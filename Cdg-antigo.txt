@@ -1,0 +1,59 @@
+import React, { useRef, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Button, Buttonm,StyleSheet, Text, TextInput, View } from 'react-native';
+export default function App(){
+  const [base, setBase] = useState('');
+  const [altura, setAltura] = useState('');
+  const [area, setArea] = useState('');
+  
+  const baseInputRef = useRef();
+ }
+function CalcularArea(){
+  if (base> 0 && altura > 0){
+    const areaCalculada = (parseFloat(base) * parseFloat(altura)) /2;
+    setArea(areaCalculada.toString());
+    setAltura('');
+    setBase('');
+    baseInputRef.current.clear();// clear limpa para não deixar sujo
+    baseInputRef.current.focus();//focus da um foco aonde é para inserir
+  } else{
+    if(base == ''|| altura == ''){
+      alert("insira todos os dados!  ");
+    }else{
+      setArea('');
+    }
+  }
+  return(
+    <View style = {styles.container}>
+      <text>Olá mamae 😍</text>
+      <text>Insira os dados abaixo para o cálculo da área do triângulo. </text>
+      <TextInput
+        placeholder = "Base"
+        style={{height:40, textAlign: 'center'}}
+        keyboardType={'numeric'}
+        value={base}
+        onChangetext={(base) => setBase(base)}
+        ref={baseInputRef}
+      />
+
+      <TextInput>
+        placeholder="altura"
+        style={{height: 40, textAlign: 'center'}}
+        keyboardType={'numeric'}
+        value={altura}
+        onChangetext={(altura) => setAltura(altura)}
+      </TextInput>
+      <Button title = "👾Calcular😝" onPress={CalcularArea}/>
+      <text>{area ? 'Resultado: ${area}' : ''}</text>
+      <statusbar> style= "auto" </statusbar>
+    </View>
+  );
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
+} 
